@@ -30,12 +30,12 @@ export const Product = ({ i }: ProductProps) => {
             <h1 className="text-sm sm:text-base md:text-md font-semibold text-white truncate">
               <span>Product {i + 1}</span>
             </h1>
-            <button className="text-black bg-white text-xs md:text-base font-bold px-1 py-1 rounded-md">
+            <button className="text-black bg-white text-xs md:text-base font-bold px-1 py-1 rounded-md md:px-4 md:py-2">
               Buy now
             </button>
           </div>
-          <div className="flex h-fit items-center justify-center  md:py-2 bg-transparent rounded-md">
-            <p className="text-white font-semibold text-base md:text-xl md:font-md">
+          <div className="flex h-fit items-center justify-center py-2 md:py-4 bg-transparent rounded-md">
+            <p className="text-white font-semibold text-sm md:text-lg md:font-md">
               900DT
             </p>
           </div>
