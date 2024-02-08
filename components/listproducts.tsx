@@ -6,7 +6,7 @@ interface ListProductsProps {
 
 export const ListProducts = ({ nbItem }: ListProductsProps) => {
   return (
-    <div className="grid xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 h-fit mx-8 w-fit gap-12 mt-10 justify-items-center">
+    <div className="grid grid-cols-2 xs:grid-cols-3 lg:grid-cols-4 h-fit xs:mx-2 w-fit gap-4 sm:gap-8 mt-10 justify-items-center">
       {[...Array(nbItem)].map((_, i) => (
         <Product key={i} i={i} />
       ))}

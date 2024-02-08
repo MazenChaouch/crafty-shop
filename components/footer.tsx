@@ -6,7 +6,7 @@ import Link from "next/link";
 export const Footer = () => {
   const year = new Date().getFullYear();
   return (
-    <div className="w-full flex flex-col h-fit border-t border-gray-300 tracking-wider items-center">
+    <div className="w-full flex flex-col h-fit border-t border-gray-300 tracking-wider items-center mt-12">
       <div className="flex max-sm:flex-col justify-around my-8 gap-8 sm:w-full">
         <div className="flex flex-col ">
           <div className="flex items-center">

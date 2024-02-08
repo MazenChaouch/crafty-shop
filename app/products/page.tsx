@@ -41,14 +41,14 @@ const Products = () => {
                   whileInView={{ x: 0, opacity: 100 }}
                   transition={{ duration: 1, delay: 0.25 }}
                   initial={{ x: -50 }}
-                  className="text-6xl font-extrabold text-slate-200 w-full text-left max-md:order-2 justify-between"
+                  className="text-3xl  xs:text-4xl md:text-6xl font-extrabold text-slate-200 w-full text-left max-md:order-2 justify-between"
                 >
                   <p>Floating Table with a arificial plant pot</p>
-                  <div className="max-md:flex max-md:justify-between mt-4">
-                    <button className="px-4 py bg-transparent text-slate-200 border-2 border-slate-200 rounded-xl text-lg">
+                  <div className="max-md:flex gap-2 mt-4">
+                    <button className="px-2  sm:px-4 bg-transparent text-slate-200 border-2 border-slate-200 rounded-xl text-base xs:text-lg">
                       Read more
                     </button>
-                    <button className="px-4 py bg-slate-200 text-sky-950 border-2 border-slate-200 rounded-xl text-lg sm:ml-2">
+                    <button className="px-2  sm:px-4 bg-slate-200 text-sky-950 border-2 border-slate-200 rounded-xl text-base xs:text-lg sm:ml-2">
                       <Icon
                         icon="mdi:cart-outline"
                         className="mr-2 inline-flex items-center"

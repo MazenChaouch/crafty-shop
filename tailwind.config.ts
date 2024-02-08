@@ -19,7 +19,7 @@ const config = {
     },
     extend: {
       screens: {
-        "xs": "375px",
+        "xs": "450px",
         "2xl": "1400px",
       },
       keyframes: {

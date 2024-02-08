@@ -31,10 +31,22 @@ export const Navbar = () => {
           initial={{ opacity: 0 }}
           className="space-x-5 lg:space-x-10"
         >
-          <Link href="/products" className="text-3xl max-sm:hidden">
+          <Link
+            href="/products"
+            className="text-base md:text-lg  lg:text-3xl max-sm:hidden"
+          >
             <span>Products</span>
           </Link>
-          <Link href="/" className="text-3xl max-sm:hidden">
+          <Link
+            href=""
+            className="text-base md:text-lg  lg:text-3xl max-sm:hidden"
+          >
+            <span>Discounts</span>
+          </Link>
+          <Link
+            href="/"
+            className="text-base md:text-lg  lg:text-3xl max-sm:hidden"
+          >
             <span>About us</span>
           </Link>
         </motion.div>
