@@ -2,12 +2,9 @@
 import Image from "next/image";
 import armchair from "../assets/armchair.png";
 import lamp from "../assets/lamp.png";
-import plant from "../assets/plant.png";
-import product1 from "../assets/product1.jpeg";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Product } from "./product";
-import { List } from "lucide-react";
+
 import { ListProducts } from "./listproducts";
 export const Hero = () => {
   return (

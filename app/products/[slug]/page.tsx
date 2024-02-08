@@ -57,7 +57,7 @@ const Product = ({ params }: { params: { slug: string } }) => {
             cursus. Lorem ipsum dolor sit amet consectetur .
           </p>
           <p className="text-2xl font-bold text-stone-500">900 DT</p>
-          <div className="flex items-center h-12 w-12 gap-4">
+          <div className="flex items-center gap-4">
             <p className="text-2xl font-bold text-stone-500">Quantity</p>
             <div className="flex items-center border border-stone-500">
               <Icon
@@ -85,6 +85,14 @@ const Product = ({ params }: { params: { slug: string } }) => {
                 }}
               />
             </div>
+          </div>
+          <div className="flex space-x-4">
+            <button className="h-full w-full bg-transparent text-stone-500 border-2 border-stone-500/70 text-base sm:text-2xl px-4 py-2 sm:px-6 sm:py-3 font-bold rounded-sm">
+              Add to cart
+            </button>
+            <button className="h-full w-full bg-sky-900 text-white border-2 border-white text-base sm:text-2xl px-4 py-2 sm:px-6 sm:py-3 font-bold rounded-sm">
+              Buy now
+            </button>
           </div>
         </div>
       </div>
