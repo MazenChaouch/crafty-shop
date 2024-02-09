@@ -6,9 +6,12 @@ import emptycart from "../assets/emptycart.png";
 import useToggleCartStore from "@/store/toggle-cart";
 export const Cart = () => {
   const CartStore = useToggleCartStore();
-
   return (
-    <div className="absolute z-50 flex w-full h-full overflow-y-hidden">
+    <div
+      className={`z-50 flex w-full h-full fixed overflow-hidden ${
+        CartStore.isCartOpen && "hidden"
+      }`}
+    >
       <div className="bg-black/30 flex-grow h-full" />
       <div className="h-full w-[600px] bg-white py-12 ">
         <button

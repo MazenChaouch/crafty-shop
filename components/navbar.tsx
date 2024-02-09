@@ -11,8 +11,7 @@ export const Navbar = () => {
   const CartStore = useToggleCartStore();
   return (
     <>
-      {CartStore.isCartOpen && <Cart />}
-      <div className="w-full flex justify-center items-center mx-auto fixed shadow-md  bg-white z-40 text-slate-600">
+      <div className="w-full flex justify-center items-center mx-auto fixed shadow-md bg-white z-40 text-slate-600">
         <div className="h-20 w-full max-w-[1200px] flex justify-between items-center self-center my-auto max-sm:px-3 max-xl:px-12 ">
           <div className="flex items-center sm:hidden">
             <Icon icon="mdi:menu" height={25} width={25} />
