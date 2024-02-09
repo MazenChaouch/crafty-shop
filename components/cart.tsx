@@ -8,8 +8,8 @@ export const Cart = () => {
   const CartStore = useToggleCartStore();
   return (
     <div
-      className={`z-50 flex w-full h-full fixed overflow-hidden ${
-        CartStore.isCartOpen && "hidden"
+      className={`z-50 flex w-full h-full fixed overscroll-y-none ${
+        !CartStore.isCartOpen && "hidden"
       }`}
     >
       <div className="bg-black/30 flex-grow h-full" />

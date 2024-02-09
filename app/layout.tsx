@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`no-scrollbar ${font.className} `}>
+      <body className={`no-scrollbar  ${font.className} `}>
         <Navbar />
         <Cart />
         <main className="flex items-center justify-center">{children}</main>
