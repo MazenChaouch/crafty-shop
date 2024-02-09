@@ -4,13 +4,11 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import "@smastrom/react-rating/style.css";
-const inter = Poppins({ weight: "400", subsets: ["latin"] });
-
+const font = Poppins({ weight: "400", subsets: ["latin"], display: "swap" });
 export const metadata: Metadata = {
   title: "Crafty Shop",
   description: "A shop for crafty people",
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -18,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`no-scrollbar ${font.className} `}>
         <Navbar />
         <main className="flex items-center justify-center">{children}</main>
         <Footer />

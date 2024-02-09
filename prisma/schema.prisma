@@ -11,23 +11,21 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model products {
-  id         Int      @id @default(autoincrement())
-  product_id String
+model product {
+  id         String    @id @default(cuid())
   name       String
   details    String
   price      Float
   image      String
-  Featured   Boolean
+  featured   Boolean
   available  Boolean
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  orders     orders[]
+  created_at DateTime? @default(now())
+  updated_at DateTime? @updatedAt
+  orders     order[]
 }
 
-model orders {
-  id         Int        @id @default(autoincrement())
-  order_id   String
+model order {
+  id         String    @id @default(cuid())
   name       String
   lastname   String
   email      String
@@ -35,7 +33,7 @@ model orders {
   address    String
   status     String
   total      Float
-  created_at DateTime   @default(now())
-  updated_at DateTime   @updatedAt
-  products   products[]
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  products   product[]
 }
