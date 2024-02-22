@@ -85,7 +85,7 @@ const PageProducts = () => {
         >
           All Products
         </motion.div>
-        <ListProducts />
+        <ListProducts nbItem={0} />
       </div>
     </div>
   );

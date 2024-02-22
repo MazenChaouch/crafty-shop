@@ -15,8 +15,10 @@ type Product = {
   created_at: Date | null;
   updated_at: Date | null;
 };
-
-export const ListProducts = () => {
+interface ListProductsProps {
+  nbItem: number;
+}
+export const ListProducts = ({ nbItem }: ListProductsProps) => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -29,9 +31,15 @@ export const ListProducts = () => {
 
   return (
     <div className="grid grid-cols-2 xs:grid-cols-3 lg:grid-cols-4 h-fit xs:mx-2 w-fit gap-4 sm:gap-8 mt-10 justify-items-center">
-      {products.map((product, index) => (
-        <Product key={index} data={product} index={index} />
-      ))}
+      {nbItem === 0
+        ? products.map((product, index) => (
+            <Product key={index} data={product} index={index} />
+          ))
+        : products
+            .slice(0, nbItem)
+            .map((product, index) => (
+              <Product key={index} data={product} index={index} />
+            ))}
     </div>
   );
 };
