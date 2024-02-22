@@ -8,7 +8,7 @@ import Link from "next/link";
 import { ListProducts } from "./listproducts";
 export const Hero = () => {
   return (
-    <div className="flex flex-col w-full max-w-[1400px] mb-48">
+    <div className="flex flex-col w-full max-w-[1400px] mb-48 mx-auto">
       <div className="flex max-sm:flex-col w-full gap-8 pt-16 sm:pt-24 p-2 max-sm:text-center px-6 xl:px-24">
         <div className="space-y-4 sm:space-y-8 p-12 sm:pt-24 bg-white z-10 mb-10">
           <motion.h1

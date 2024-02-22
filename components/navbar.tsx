@@ -36,19 +36,19 @@ export const Navbar = () => {
           >
             <Link
               href="/products"
-              className="text-base md:text-lg  lg:text-3xl max-sm:hidden"
+              className="text-base md:text-lg  lg:text-xl max-sm:hidden"
             >
               <span>Products</span>
             </Link>
             <Link
               href=""
-              className="text-base md:text-lg  lg:text-3xl max-sm:hidden"
+              className="text-base md:text-lg  lg:text-xl max-sm:hidden"
             >
               <span>Discounts</span>
             </Link>
             <Link
               href="/"
-              className="text-base md:text-lg  lg:text-3xl max-sm:hidden"
+              className="text-base md:text-lg  lg:text-xl max-sm:hidden"
             >
               <span>About us</span>
             </Link>

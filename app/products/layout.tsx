@@ -1,17 +1,17 @@
 import { Cart } from "@/components/cart";
 import { Footer } from "@/components/footer";
-import { Hero } from "@/components/hero";
 import { Navbar } from "@/components/navbar";
+import React from "react";
 
-const PageHome = () => {
+const LayoutProduct = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar />
       <Cart />
-      <Hero />
+      <main className="flex items-center justify-center">{children}</main>
       <Footer />
     </>
   );
 };
 
-export default PageHome;
+export default LayoutProduct;

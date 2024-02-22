@@ -2,9 +2,7 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 import table from "../../assets/table.png";
-import plant from "../../assets/plant.png";
 import { motion } from "framer-motion";
-import { Product } from "@/components/product";
 import { ListProducts } from "@/components/listproducts";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -16,7 +14,7 @@ import {
 } from "@/components/ui/carousel";
 import React from "react";
 
-const Products = () => {
+const PageProducts = () => {
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true }),
   );
@@ -87,10 +85,10 @@ const Products = () => {
         >
           All Products
         </motion.div>
-        <ListProducts nbItem={12} />
+        <ListProducts />
       </div>
     </div>
   );
 };
 
-export default Products;
+export default PageProducts;

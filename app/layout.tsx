@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import "@smastrom/react-rating/style.css";
-import { Cart } from "@/components/cart";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 const font = Poppins({ weight: "400", subsets: ["latin"], display: "swap" });
 export const metadata: Metadata = {
   title: "Crafty Shop",
@@ -18,10 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`no-scrollbar  ${font.className} `}>
-        <Navbar />
-        <Cart />
-        <main className="flex items-center justify-center">{children}</main>
-        <Footer />
+        <EdgeStoreProvider>{children}</EdgeStoreProvider>
       </body>
     </html>
   );

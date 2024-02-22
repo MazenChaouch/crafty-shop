@@ -14,9 +14,11 @@ datasource db {
 model product {
   id         String    @id @default(cuid())
   name       String
+  link       String
   details    String
-  price      Float
+  price      Int
   image      String
+  rating     Float?    @default(0)
   featured   Boolean
   available  Boolean
   created_at DateTime? @default(now())
