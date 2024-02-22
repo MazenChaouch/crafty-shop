@@ -13,7 +13,6 @@ import {
 import { LoginSchema } from "@/schemas";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { login } from "@/actions/login";
 import { FormError } from "./form-error";
 
 export const LoginForm = () => {
@@ -32,13 +31,7 @@ export const LoginForm = () => {
     setError("");
 
     startTransition(() => {
-      login(data)
-        .then((data) => {
-          if (data?.error) {
-            setError(data?.error);
-          }
-        })
-        .catch((err) => setError("Something went wrong!"));
+      // do something
     });
   };
   return (
