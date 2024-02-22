@@ -33,7 +33,7 @@ const PageProduct = () => {
     link: searchParams.get("link") || "table-deco",
     details: searchParams.get("details") || "Table deco details",
     price: Number(searchParams.get("price")) || 100,
-    image: searchParams.get("image"),
+    image: searchParams.get("image") || "",
     rating: Number(searchParams.get("rating")) || 3,
     featured: Boolean(searchParams.get("featured")) || false,
     available: Boolean(searchParams.get("available")) || true,
