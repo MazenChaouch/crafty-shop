@@ -20,11 +20,13 @@ interface ListProductsProps {
 }
 export const ListProducts = ({ nbItem }: ListProductsProps) => {
   const [products, setProducts] = useState<Product[]>([]);
-
+  const updateProducts = (newProducts: Product[]) => {
+    setProducts(newProducts);
+  };
   useEffect(() => {
     ProductLoad().then((data) => {
       if (data) {
-        setProducts(data);
+        updateProducts(data);
       }
     });
   }, []);
