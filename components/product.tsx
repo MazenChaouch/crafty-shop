@@ -6,7 +6,7 @@ interface ProductProps {
   data: {
     id: string;
     name: string;
-    link: string;
+    link?: string;
     details: string;
     price: number;
     image: string;

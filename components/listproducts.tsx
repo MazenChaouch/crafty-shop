@@ -12,8 +12,8 @@ interface Product {
   available: boolean;
   created_at: Date | null;
   updated_at: Date | null;
-  link: string; // Make link optional
-  rating?: number | null; // Make rating optional
+  link?: string;
+  rating?: number | null;
 }
 
 interface ListProductsProps {
