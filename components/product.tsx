@@ -10,7 +10,7 @@ interface ProductProps {
     details: string;
     price: number;
     image: string;
-    rating: number | null;
+    rating?: number | null;
     featured: boolean;
     available: boolean;
     created_at: Date | null;

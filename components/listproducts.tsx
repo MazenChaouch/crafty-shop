@@ -2,19 +2,20 @@ import { use, useEffect, useState } from "react";
 import { Product } from "./product";
 import ProductLoad from "@/action/product";
 
-type Product = {
+interface Product {
   id: string;
   name: string;
-  link: string;
   details: string;
   price: number;
   image: string;
-  rating: number | null;
   featured: boolean;
   available: boolean;
   created_at: Date | null;
   updated_at: Date | null;
-};
+  link: string; // Make link optional
+  rating?: number | null; // Make rating optional
+}
+
 interface ListProductsProps {
   nbItem: number;
 }
@@ -23,6 +24,7 @@ export const ListProducts = ({ nbItem }: ListProductsProps) => {
   const updateProducts = (newProducts: Product[]) => {
     setProducts(newProducts);
   };
+
   useEffect(() => {
     ProductLoad().then((data) => {
       if (data) {
