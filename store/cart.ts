@@ -24,19 +24,21 @@ const setCartItems = (cart: CartItem[]) => {
 const initialState: CartState = {
   CartItems: [],
   CartItem: {
+    quantity: 0,
+    price: 0,
     product: {
       id: "",
       name: "",
+      link: "",
       details: "",
       price: 0,
       image: "",
+      rating: null,
       featured: false,
       available: false,
       created_at: null,
       updated_at: null,
     },
-    quantity: 0,
-    price: 0,
   },
   total: 0,
   addItem: (CartItem: CartItem) => {},
