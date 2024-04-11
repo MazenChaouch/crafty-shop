@@ -3,22 +3,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Rating } from "./rating";
 import product1 from "../assets/product1.jpeg";
+import { product } from "@prisma/client";
 interface ProductProps {
-  product: {
-    id: string;
-    name: string;
-    link?: string;
-    details: string;
-    oldPrice?: number;
-    discount?: number;
-    price: number;
-    image: string;
-    rating?: number;
-    featured: boolean;
-    available: boolean;
-    created_at: string;
-    updated_at: string;
-  };
+  product: product;
   index: number;
 }
 export const Product = ({ product, index }: ProductProps) => {

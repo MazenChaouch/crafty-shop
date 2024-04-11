@@ -1,27 +1,14 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "./product";
 import ProductLoad from "@/action/product";
-
-interface Product {
-  id: string;
-  name: string;
-  details: string;
-  price: number;
-  image: string;
-  featured: boolean;
-  available: boolean;
-  created_at: Date | null;
-  updated_at: Date | null;
-  link?: string;
-  rating?: number | null;
-}
+import { product } from "@prisma/client";
 
 interface ListProductsProps {
   nbItem: number;
 }
 export const ListProducts = ({ nbItem }: ListProductsProps) => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const updateProducts = (newProducts: Product[]) => {
+  const [products, setProducts] = useState<product[]>([]);
+  const updateProducts = (newProducts: product[]) => {
     setProducts(newProducts);
   };
 
