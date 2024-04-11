@@ -6,12 +6,13 @@ import name from "../assets/name.svg";
 import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import useToggleCartStore from "@/store/toggle-cart";
-import { Cart } from "./cart";
+import cartStore from "@/store/cart";
 export const Navbar = () => {
   const CartStore = useToggleCartStore();
+  const { numberOfProducts } = cartStore();
   return (
     <>
-      <div className="w-full flex justify-center items-center mx-auto fixed shadow-md bg-white z-40 text-slate-600">
+      <div className="w-full flex justify-center items-center mx-auto fixed shadow-md bg-white z-40 text-slate-600 max-md:px-4">
         <div className="h-20 w-full max-w-[1200px] flex justify-between items-center self-center my-auto max-sm:px-3 max-xl:px-12 ">
           <div className="flex items-center sm:hidden">
             <Icon icon="mdi:menu" height={25} width={25} />
@@ -66,8 +67,8 @@ export const Navbar = () => {
               className="hover:scale-110 transition-transform duration-300 ease-in-out text-slate-600"
             />
             <span className="text-sm font-light text-stone-200">
-              <span className="absolute -top-2 -right-2 bg-sky-900 px-1 rounded-full">
-                0
+              <span className="absolute -top-2 -right-2 bg-sky-900 px-1.5 rounded-full">
+                {numberOfProducts}
               </span>
             </span>
           </button>

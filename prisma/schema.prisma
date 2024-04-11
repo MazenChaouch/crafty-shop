@@ -16,13 +16,13 @@ model product {
   name       String
   link       String
   details    String
+  oldPrice  Int?
   price      Int
+  discount   Int?
   image      String
   rating     Float?    @default(0)
   featured   Boolean
   available  Boolean
-  created_at DateTime? @default(now())
-  updated_at DateTime? @updatedAt
   orders     order[]
 }
 

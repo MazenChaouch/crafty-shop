@@ -34,16 +34,18 @@ export const ListProducts = ({ nbItem }: ListProductsProps) => {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 xs:grid-cols-3 lg:grid-cols-4 h-fit xs:mx-2 w-fit gap-4 sm:gap-8 mt-10 justify-items-center">
-      {nbItem === 0
-        ? products.map((product, index) => (
-            <Product key={index} data={product} index={index} />
-          ))
-        : products
-            .slice(0, nbItem)
-            .map((product, index) => (
-              <Product key={index} data={product} index={index} />
-            ))}
+    <div className="container p-4">
+      <div className="flex flex-wrap md:justify-between justify-around gap-8 p-8">
+        {nbItem === 0
+          ? products.map((product, index) => (
+              <Product key={index} product={product} index={index} />
+            ))
+          : products
+              .slice(0, nbItem)
+              .map((product, index) => (
+                <Product key={index} product={product} index={index} />
+              ))}
+      </div>
     </div>
   );
 };

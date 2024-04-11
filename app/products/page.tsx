@@ -81,7 +81,7 @@ const PageProducts = () => {
           whileInView={{ y: 0, opacity: 100 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           initial={{ y: 30, opacity: 0 }}
-          className="text-6xl font-extrabold text-sky-900 w-full px-8"
+          className="text-3xl md:text-6xl font-extrabold text-sky-900 w-full px-8"
         >
           All Products
         </motion.div>

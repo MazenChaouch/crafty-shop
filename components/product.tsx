@@ -1,61 +1,61 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-
+import { Rating } from "./rating";
+import product1 from "../assets/product1.jpeg";
 interface ProductProps {
-  data: {
+  product: {
     id: string;
     name: string;
     link?: string;
     details: string;
+    oldPrice?: number;
+    discount?: number;
     price: number;
     image: string;
-    rating?: number | null;
+    rating?: number;
     featured: boolean;
     available: boolean;
-    created_at: Date | null;
-    updated_at: Date | null;
   };
   index: number;
 }
-export const Product = ({ data, index }: ProductProps) => {
-  const { created_at, updated_at, ...linkData } = data;
+export const Product = ({ product, index }: ProductProps) => {
+  const { ...linkData } = product;
   return (
-    <div className="h-full w-fit flex justify-center items-center">
-      <motion.div
-        whileInView={{ x: 0, opacity: 100 }}
-        transition={{ duration: 1, delay: index / 12 }}
-        initial={{ x: 10, opacity: 0 }}
-        className=" h-[290px] w-[140px] sm:h-[400px] sm:w-[191px] md:h-[500px] md:w-[239px] bg-white items-center rounded-md"
-      >
-        <Link href={{ pathname: `/products/${data.link}`, query: linkData }}>
-          <div className="h-[220px] w-[140px]  sm:h-[300px] sm:w-[191px] md:h-[390px] md:w-[239px] overflow-hidden border border-zinc-700/50  rounded-t-md">
-            <Image
-              src={data.image}
-              alt={`product${index + 1}`}
-              width={239}
-              height={390}
-              loading="lazy"
-              className="object-cover h-full w-full sm:hover:scale-110 transition-transform duration-500 ease-in-out object-center overflow-hidden "
-            />
-          </div>
-        </Link>
-        <div className="flex justify-between items-end h-[70px] w-[140px] sm:h-[100px] sm:w-[191px] md:h-[110px]  md:w-[239px] bg-sky-950 z-10 p-2 rounded-b-md">
-          <div className="flex flex-col h-full w-2/3 justify-between p-1 sm:p-2">
-            <h1 className="text-sm sm:text-base md:text-md font-semibold text-white truncate">
-              <span>{data.name}</span>
-            </h1>
-            <button className="text-black bg-white text-xs md:text-base font-bold px-1 py-1 rounded-md md:px-4 md:py-2">
-              Buy now
-            </button>
-          </div>
-          <div className="flex w-full h-fit items-center justify-center py-2 md:py-4 bg-transparent rounded-md">
-            <p className="text-white font-semibold text-sm md:text-lg md:font-md">
-              {data.price} DT
-            </p>
-          </div>
+    <motion.div
+      whileInView={{ y: 0, opacity: 100 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      initial={{ y: 30, opacity: 0 }}
+      className="h-fit w-fit space-y-2 group group-hover:scale-95"
+    >
+      <Link href={{ pathname: `products/${product.link}`, query: product }}>
+        <div className="rounded-xl bg-stone-200 p-2">
+          <Image
+            src={product1}
+            alt={product.name}
+            className="size-fit max-h-96 object-contain duration-500 ease-in-out scale-100 group-hover:scale-105 rounded-xl"
+          />
         </div>
-      </motion.div>
-    </div>
+      </Link>
+      <div className="font-Satoshi text-lg font-bold md:text-xl">
+        {product.name}
+      </div>
+      {product.rating != null && <Rating rating={product.rating} />}
+      <div className="flex h-fit w-full space-x-1 lg:space-x-2">
+        <div className="font-Satoshi text-sm font-bold md:text-xl text-sky-800">
+          {product.price} DT
+        </div>
+        {product.oldPrice && (
+          <div className="font-Satoshi text-sm font-bold text-stone-500 line-through md:text-xl">
+            {product.oldPrice} DT
+          </div>
+        )}
+        {product.discount && (
+          <div className="g:py-1 rounded-xl bg-red-100 px-2 py-0.5 font-Satoshi font-medium text-red-500 max-lg:text-sm lg:rounded-3xl lg:px-3">
+            -{product.discount}%
+          </div>
+        )}
+      </div>
+    </motion.div>
   );
 };

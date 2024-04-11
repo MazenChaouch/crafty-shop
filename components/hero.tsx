@@ -33,7 +33,7 @@ export const Hero = () => {
             whileInView={{ y: 0, opacity: 100 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             initial={{ y: 30, opacity: 0 }}
-            className="px-4 py-2 text-white bg-sky-950 rounded-md text-2xl font-semibold"
+            className="px-4 md:px-6 py-2 text-white bg-sky-950 rounded-md text-lg md:font-semibold"
           >
             <Link href="/products">Shop now</Link>
           </motion.button>
@@ -72,7 +72,7 @@ export const Hero = () => {
           whileInView={{ y: 0, opacity: 100 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           initial={{ y: 30, opacity: 0 }}
-          className="text-6xl font-extrabold text-sky-900 w-full text-center "
+          className="text-3xl md:text-6xl font-extrabold text-sky-900 w-full text-center "
         >
           Our Products
         </motion.div>

@@ -1,82 +1,103 @@
 import { product } from "@prisma/client";
 import { create } from "zustand";
 
-type CartItem = {
+type cartProducts = {
   product: product;
   quantity: number;
-  price: number;
 };
-interface CartState {
-  CartItems: CartItem[];
-  CartItem: CartItem;
+
+type cartState = {
+  cartProducts: cartProducts[];
+  numberOfProducts: number;
   total: number;
-  addItem: (CartItem: CartItem) => void;
-  removeItem: (CartItem: CartItem) => void;
-  clearCart: () => void;
-}
-const getCartItems = () => {
-  const cart = localStorage.getItem("cart");
-  return cart ? JSON.parse(cart) : [];
+  addToCart: (item: product, quantity: number) => void;
+  setQuantity: (id: string, action: string) => void;
+  deleteProduct: (id: string) => void;
 };
-const setCartItems = (cart: CartItem[]) => {
-  localStorage.setItem("cart", JSON.stringify(cart));
-};
-const initialState: CartState = {
-  CartItems: [],
-  CartItem: {
-    quantity: 0,
-    price: 0,
-    product: {
-      id: "",
-      name: "",
-      link: "",
-      details: "",
-      price: 0,
-      image: "",
-      rating: null,
-      featured: false,
-      available: false,
-      created_at: null,
-      updated_at: null,
-    },
-  },
+
+const cartStore = create<cartState>((set) => ({
+  cartProducts: [],
+  numberOfProducts: 0,
   total: 0,
-  addItem: (CartItem: CartItem) => {},
-  removeItem: (CartItem: CartItem) => {},
-  clearCart: () => {},
-};
-export const useCartStore = create<CartState>((set) => ({
-  ...initialState,
-  CartItems: getCartItems(),
-  addItem: (CartItem: CartItem) => {
-    const cart = getCartItems();
-    const existingItem = cart.find(
-      (item: CartItem) => item.product.id === CartItem.product.id,
-    );
-    if (existingItem) {
-      existingItem.quantity += CartItem.quantity;
-    } else {
-      cart.push(CartItem);
-    }
-    setCartItems(cart);
-    set({ CartItems: cart });
-  },
-  removeItem: (CartItem: CartItem) => {
-    const cart = getCartItems();
-    const existingItem = cart.find(
-      (item: CartItem) => item.product.id === CartItem.product.id,
-    );
-    if (existingItem) {
-      existingItem.quantity -= CartItem.quantity;
-      if (existingItem.quantity <= 0) {
-        cart.splice(cart.indexOf(existingItem), 1);
+  addToCart: (item: product, quantity: number) =>
+    set((state) => {
+      const index = state.cartProducts.findIndex(
+        (product) => product.product.id === item.id,
+      );
+      if (index === -1) {
+        const newCartProducts = [
+          ...state.cartProducts,
+          { product: item, quantity: quantity },
+        ];
+        const newNumberOfProducts = state.numberOfProducts + quantity;
+        const newTotal = state.total + item.price * quantity;
+        return {
+          cartProducts: newCartProducts,
+          numberOfProducts: newNumberOfProducts,
+          total: newTotal,
+        };
       }
-    }
-    setCartItems(cart);
-    set({ CartItems: cart });
-  },
-  clearCart: () => {
-    setCartItems([]);
-    set({ CartItems: [] });
-  },
+      const updatedCartProducts = [...state.cartProducts];
+      updatedCartProducts[index].quantity += quantity;
+      const newNumberOfProducts = state.numberOfProducts + quantity;
+      const newTotal = state.total + item.price * quantity;
+      return {
+        cartProducts: updatedCartProducts,
+        numberOfProducts: newNumberOfProducts,
+        total: newTotal,
+      };
+    }),
+  setQuantity: (id: string, action: string) =>
+    set((state) => {
+      const index = state.cartProducts.findIndex(
+        (product) => product.product.id === id,
+      );
+      if (index === -1) return state;
+      const updatedCartProducts = [...state.cartProducts];
+      if (action === "upQuantity") {
+        updatedCartProducts[index].quantity += 1;
+        return {
+          ...state,
+          cartProducts: updatedCartProducts,
+          total: state.total + updatedCartProducts[index].product.price,
+          numberOfProducts: state.numberOfProducts + 1,
+        };
+      } else if (action === "downQuantity") {
+        updatedCartProducts[index].quantity -= 1;
+
+        return {
+          ...state,
+          cartProducts: updatedCartProducts,
+          total: state.total - updatedCartProducts[index].product.price,
+          numberOfProducts: state.numberOfProducts - 1,
+        };
+      }
+
+      return {
+        ...state,
+        cartProducts: updatedCartProducts,
+      };
+    }),
+  deleteProduct: (id: string) =>
+    set((state) => {
+      const index = state.cartProducts.findIndex(
+        (product) => product.product.id === id,
+      );
+      if (index === -1) return state;
+      const updatedCartProducts = state.cartProducts.filter(
+        (product) => product.product.id !== id,
+      );
+      const newNumberOfProducts =
+        state.numberOfProducts - state.cartProducts[index].quantity;
+      const newTotal =
+        state.total -
+        state.cartProducts[index].product.price *
+          state.cartProducts[index].quantity;
+      return {
+        cartProducts: updatedCartProducts,
+        numberOfProducts: newNumberOfProducts,
+        total: newTotal,
+      };
+    }),
 }));
+export default cartStore;

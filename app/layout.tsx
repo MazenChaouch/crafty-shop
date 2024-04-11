@@ -3,7 +3,10 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import "@smastrom/react-rating/style.css";
 import { EdgeStoreProvider } from "@/lib/edgestore";
-const font = Poppins({ weight: "400", subsets: ["latin"], display: "swap" });
+import { Navbar } from "@/components/navbar";
+import { Cart } from "@/components/cart";
+import { Footer } from "@/components/footer";
+const font = Poppins({ weight: "300", subsets: ["latin"], display: "swap" });
 export const metadata: Metadata = {
   title: "Crafty Shop",
   description: "A shop for crafty people",
@@ -16,7 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`no-scrollbar  ${font.className} `}>
-        <EdgeStoreProvider>{children}</EdgeStoreProvider>
+        <EdgeStoreProvider>
+          <Navbar />
+          <Cart />
+          {children}
+          <Footer />
+        </EdgeStoreProvider>
       </body>
     </html>
   );
