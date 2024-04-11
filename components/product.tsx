@@ -16,6 +16,8 @@ interface ProductProps {
     rating?: number;
     featured: boolean;
     available: boolean;
+    created_at: string;
+    updated_at: string;
   };
   index: number;
 }
