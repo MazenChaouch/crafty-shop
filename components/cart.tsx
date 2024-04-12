@@ -7,7 +7,12 @@ import Image from "next/image";
 import emptycart from "@/assets/emptycart.png";
 import { CartItem } from "./cart-item";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 export const Cart = () => {
+  const router = useRouter();
+  const navigateToCheckout = () => {
+    router.push("/checkout");
+  };
   const cartstate = useToggleCartStore();
   const { cartProducts, numberOfProducts, total } = useCartStore();
   return (
@@ -17,7 +22,7 @@ export const Cart = () => {
       }`}
     >
       <div className="bg-black/30 flex-grow h-full" />
-      <div className="h-full w-[600px] bg-white py-12">
+      <div className="h-full w-[450px] bg-white py-12">
         <button
           className="flex px-6 py-1 sm:text-2xl font-light text-stone-700 items-center space-x-2"
           onClick={() => {
@@ -51,20 +56,30 @@ export const Cart = () => {
           </>
         ) : (
           cartProducts.map((product, index) => (
-            <div key={index} className="p-8">
+            <div key={index} className="container py-8 space-y-4">
               <CartItem {...product} />
+              {numberOfProducts !== 0 && (
+                <div className="w-full flex justify-between">
+                  <div className="text-2xl text-stone-400">
+                    Total:{" "}
+                    <span className="text-2xl font-bold text-stone-900">
+                      {total}DT
+                    </span>
+                  </div>
+                  <Button
+                    variant={"outline"}
+                    className="w-fit bg-sky-700 text-white hover:bg-sky-800 hover:text-white active:translate-y-0.5"
+                    onClick={() => {
+                      navigateToCheckout();
+                      cartstate.toggleCart();
+                    }}
+                  >
+                    Checkout
+                  </Button>
+                </div>
+              )}
             </div>
           ))
-        )}
-        {numberOfProducts !== 0 && (
-          <div className="w-full flex justify-end px-16">
-            <Button
-              variant={"outline"}
-              className="w-fit bg-sky-700 text-white hover:bg-sky-800 hover:text-white active:translate-y-0.5"
-            >
-              Checkout
-            </Button>
-          </div>
         )}
       </div>
     </div>

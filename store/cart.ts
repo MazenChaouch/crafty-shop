@@ -13,6 +13,7 @@ type cartState = {
   addToCart: (item: product, quantity: number) => void;
   setQuantity: (id: string, action: string) => void;
   deleteProduct: (id: string) => void;
+  clearCart: () => void;
 };
 
 const cartStore = create<cartState>((set) => ({
@@ -99,5 +100,11 @@ const cartStore = create<cartState>((set) => ({
         total: newTotal,
       };
     }),
+  clearCart: () =>
+    set(() => ({
+      cartProducts: [],
+      numberOfProducts: 0,
+      total: 0,
+    })),
 }));
 export default cartStore;

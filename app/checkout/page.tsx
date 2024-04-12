@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckoutSchema } from "@/schemas";
 import { z } from "zod";
 import useCartStore from "@/store/cart";
-import emptycart from "@/assets/emptycart.png";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,8 +14,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
 import { CartItem } from "@/components/cart-item";
+import { SendMail } from "@/action/send-mail";
+import { clear } from "console";
+
 const CheckoutPage = () => {
   const form = useForm<z.infer<typeof CheckoutSchema>>({
     resolver: zodResolver(CheckoutSchema),
@@ -29,14 +30,30 @@ const CheckoutPage = () => {
       phone: "",
     },
   });
+
   const onSubmit = (data: z.infer<typeof CheckoutSchema>) => {
-    console.log(data);
+    SendMail(data, total, numberOfProducts, cartProducts[0].product.price).then(
+      (res) => {
+        if (res) {
+          alert("Email sent successfully");
+          clearCart();
+          form.reset();
+        } else {
+          alert("Email failed to send");
+          clearCart();
+          form.reset();
+        }
+      },
+    );
   };
+
   const { handleSubmit } = form;
-  const { cartProducts, numberOfProducts, total } = useCartStore();
+
+  const { cartProducts, numberOfProducts, total, clearCart } = useCartStore();
+
   return (
-    <div className="w-full max-w-[1200px] h-fit pt-24 sm:pt-20 ">
-      <div className="flex max-md:flex-col md:space-x-4 w-full h-fit md:pt-24">
+    <div className="container h-fit pt-16 sm:pt-20">
+      <div className="flex max-md:flex-col max-md:space-y-4 md:space-x-4 w-full h-fit pt-12">
         <div className="bg-stone-100 rounded-lg p-8 md:w-2/3 w-full">
           <div className="text-4xl font-bold py-8">Payment Details</div>
           <Form {...form}>
@@ -145,21 +162,21 @@ const CheckoutPage = () => {
           <div className="w-full h-fit py-4">
             <div className="flex justify-between">
               <div className="text-2xl text-stone-400">Total</div>
-              <div className="text-2xl font-bold">{total}DT</div>
+              <div className="text-xl font-bold">{total}DT</div>
             </div>
             <div className="flex justify-between">
               <div className="text-2xl text-stone-400">Shipping</div>
-              <div className="text-2xl font-bold">Free</div>
+              <div className="text-xl font-bold">Free</div>
             </div>
             <div className="w-full h-0.5 bg-stone-200 my-4" />
             <div className="flex justify-between">
               <div className="text-2xl text-stone-400">Grand Total</div>
-              <div className="text-2xl font-bold">{total}DT</div>
+              <div className="text-xl font-bold">{total}DT</div>
             </div>
           </div>
           <Button
             className="w-full bg-sky-700 text-white hover:bg-sky-800 hover:text-white active:translate-y-0.5"
-            onClick={handleSubmit(onSubmit)}
+            onClick={() => handleSubmit(onSubmit)()}
           >
             Checkout
           </Button>

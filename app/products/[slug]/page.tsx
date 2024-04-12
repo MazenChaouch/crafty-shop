@@ -19,7 +19,7 @@ const PageProduct = () => {
     else setSeeMore("h-36");
   };
   const [qte, setQte] = useState(1);
-  const { addToCart } = cartStore();
+  const { addToCart, clearCart } = cartStore();
   const searchParams = useSearchParams();
   const data: product = {
     id: searchParams.get("id") || "",
@@ -118,14 +118,17 @@ const PageProduct = () => {
                 className="group h-full w-full bg-transparent text-stone-500 border-2 border-stone-500/70 text-sm sm:text-2xl px-4 py-2 sm:px-6 sm:py-3 font-bold rounded-sm hover:bg-stone-100 active:translate-y-0.5"
                 onClick={() => {
                   addToCart(data, qte);
-                  console.log(cartStore.getState());
                 }}
               >
                 Add to cart
               </button>
               <button
                 className="h-full w-full bg-sky-900 text-white border-2 border-white text-sm sm:text-2xl px-4 py-2 sm:px-6 sm:py-3 font-bold rounded-sm hover:bg-sky-950 active:translate-y-0.5"
-                onClick={handleButtonClick}
+                onClick={() => {
+                  clearCart();
+                  addToCart(data, qte);
+                  handleButtonClick();
+                }}
               >
                 Buy now
               </button>

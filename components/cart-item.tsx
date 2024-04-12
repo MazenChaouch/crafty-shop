@@ -12,14 +12,14 @@ export const CartItem = ({ product, quantity }: cartProducts) => {
   const { setQuantity, deleteProduct, total } = cartStore();
   return (
     <>
-      <div className="w-full h-fit flex items-center">
+      <div className="w-full h-fit flex items-center space-x-8">
         <Image
           src={product1}
           alt="product"
           className="object-contain h-48 w-fit rounded-md"
         />
-        <div className="flex flex-col w-full h-48 px-8 space-y-4 justify-ar">
-          <div className="flex flex-col w-full ">
+        <div className="flex flex-col w-full h-48 space-y-4 justify-ar">
+          <div className="flex flex-col w-full">
             <p className="text-sm md:text-xl font-bold text-stone-800">
               {product.name}
             </p>
@@ -27,7 +27,7 @@ export const CartItem = ({ product, quantity }: cartProducts) => {
               {product.price}DT
             </p>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             <div className="flex w-fit h-fit items-center border border-stone-500">
               <Icon
                 icon="ic:outline-minus"
@@ -54,7 +54,8 @@ export const CartItem = ({ product, quantity }: cartProducts) => {
               />
             </div>
             <Button
-              className="bg-red-100 w-4 h-8 text-red-500 rounded-full hover:bg-red-500 hover:text-white"
+              className="bg-red-100 text-red-500 rounded-full hover:bg-red-500 hover:text-white"
+              size={"sm"}
               variant={"outline"}
               onClick={() => {
                 deleteProduct(product.id);
@@ -62,9 +63,6 @@ export const CartItem = ({ product, quantity }: cartProducts) => {
             >
               X
             </Button>
-          </div>
-          <div className="text-sky-800 md:text-2xl w-full h-fit">
-            Total : {total}
           </div>
         </div>
       </div>
