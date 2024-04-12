@@ -77,6 +77,7 @@ export const EmailSend = async (
     </tr>
     <tr>
       <td>Total</td>
+      <td></td>
       <td>${total}</td>
     </tr>
   </table>
