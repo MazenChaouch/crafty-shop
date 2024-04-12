@@ -16,17 +16,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { CartItem } from "@/components/cart-item";
 import { SendMail } from "@/action/send-mail";
-import { clear } from "console";
-
+import { useRouter } from "next/navigation";
+import { ToastAction } from "@/components/ui/toast";
+import { toast } from "@/components/ui/use-toast";
 const CheckoutPage = () => {
+  const route = useRouter();
   const form = useForm<z.infer<typeof CheckoutSchema>>({
     resolver: zodResolver(CheckoutSchema),
     defaultValues: {
       fullname: "",
-      email: "",
       address: "",
       city: "",
-      zip: "",
       phone: "",
     },
   });
@@ -35,11 +35,21 @@ const CheckoutPage = () => {
     SendMail(data, total, numberOfProducts, cartProducts[0].product.price).then(
       (res) => {
         if (res) {
-          alert("Email sent successfully");
+          toast({
+            variant: "success",
+            title: "your order has been sent successfully",
+            description: "Check your email for more details",
+          });
           clearCart();
           form.reset();
+          route.push("/success");
         } else {
-          alert("Email failed to send");
+          toast({
+            variant: "destructive",
+            title: "Error",
+            description: "Error sending your order",
+            action: <ToastAction altText="Retry">Retry</ToastAction>,
+          });
           clearCart();
           form.reset();
         }
@@ -95,7 +105,7 @@ const CheckoutPage = () => {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="exemple@mail.tn" {...field} />
+                      <Input placeholder="Exemple@gmail.com" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -103,14 +113,14 @@ const CheckoutPage = () => {
               />
               <FormField
                 control={form.control}
-                name="address"
+                name="city"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>
-                      Address<span className="text-red-500">*</span>
+                      City<span className="text-red-500">*</span>
                     </FormLabel>
                     <FormControl>
-                      <Input placeholder="address/street" {...field} />
+                      <Input placeholder="City" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -119,14 +129,14 @@ const CheckoutPage = () => {
               <div className="flex">
                 <FormField
                   control={form.control}
-                  name="city"
+                  name="address"
                   render={({ field }) => (
                     <FormItem className="flex flex-col flex-grow">
                       <FormLabel>
-                        City<span className="text-red-500">*</span>
+                        Address<span className="text-red-500">*</span>
                       </FormLabel>
                       <FormControl>
-                        <Input placeholder="City" {...field} />
+                        <Input placeholder="Address/street" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -137,9 +147,7 @@ const CheckoutPage = () => {
                   name="zip"
                   render={({ field }) => (
                     <FormItem className="flex flex-col flex-grow ml-2">
-                      <FormLabel>
-                        Zip<span className="text-red-500">*</span>
-                      </FormLabel>
+                      <FormLabel>Zip</FormLabel>
                       <FormControl>
                         <Input placeholder="Zip" {...field} />
                       </FormControl>
@@ -150,6 +158,9 @@ const CheckoutPage = () => {
               </div>
             </form>
           </Form>
+          <div className="mt-4 font-semibold">
+            fields with <span className="text-red-500">*</span> are required
+          </div>
         </div>
         <div className="bg-stone-100 rounded-lg p-8 md:w-1/3 w-full">
           <div className="text-4xl font-bold py-8">Summary</div>
@@ -176,9 +187,17 @@ const CheckoutPage = () => {
           </div>
           <Button
             className="w-full bg-sky-700 text-white hover:bg-sky-800 hover:text-white active:translate-y-0.5"
-            onClick={() => handleSubmit(onSubmit)()}
+            onClick={() => {
+              numberOfProducts != 0
+                ? handleSubmit(onSubmit)()
+                : toast({
+                    variant: "destructive",
+                    title: "Error",
+                    description: "You have no products in your cart",
+                  });
+            }}
           >
-            Checkout
+            Order now
           </Button>
         </div>
       </div>

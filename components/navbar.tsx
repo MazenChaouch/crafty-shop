@@ -36,6 +36,12 @@ export const Navbar = () => {
             className="space-x-5 lg:space-x-10"
           >
             <Link
+              href="/"
+              className="text-base md:text-lg  lg:text-xl max-sm:hidden"
+            >
+              <span>Home</span>
+            </Link>
+            <Link
               href="/products"
               className="text-base md:text-lg  lg:text-xl max-sm:hidden"
             >
@@ -45,7 +51,7 @@ export const Navbar = () => {
               href=""
               className="text-base md:text-lg  lg:text-xl max-sm:hidden"
             >
-              <span>Discounts</span>
+              <span>Contact us</span>
             </Link>
             <Link
               href="/"

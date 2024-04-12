@@ -19,8 +19,8 @@ const PageProducts = () => {
     Autoplay({ delay: 2000, stopOnInteraction: true }),
   );
   return (
-    <div className="flex flex-col justify-center h-full w-full pt-24 sm:pt-20 ">
-      <div className="flex justify-center items-center h-fit min-h-[400px] w-full max-w-[1200px] self-center px-8">
+    <div className="flex flex-col justify-center h-full w-full pt-24 sm:pt-20">
+      <div className="container flex justify-center items-center h-fit self-center px-4 md:px-8">
         <motion.div
           whileInView={{ opacity: 100 }}
           transition={{ duration: 0.5 }}
@@ -28,12 +28,12 @@ const PageProducts = () => {
           className=" sm:m-12 bg-sky-950/80 rounded-xl py-16"
         >
           <Carousel
-            className="flex justify-center items-center mx-auto w-10/12"
+            className="flex justify-center items-center mx-auto w-10/12 max-md:w-8/12"
             plugins={[plugin.current]}
             onMouseEnter={plugin.current.stop}
             onMouseLeave={plugin.current.reset}
           >
-            <CarouselContent className="h-fit min-h-[400px] w-full max-w-[1200px] overflow-visible">
+            <CarouselContent className="h-fit overflow-visible">
               <CarouselItem className="grid md:grid-cols-2 items-center overflow-visible">
                 <motion.div
                   whileInView={{ x: 0, opacity: 100 }}
@@ -55,7 +55,7 @@ const PageProducts = () => {
                     </button>
                   </div>
                 </motion.div>
-                <div className="mx-auto max-md:h-[350px] max-md:w-[200px] flex justify-start items-center ">
+                <div className="mx-auto flex justify-start items-center ">
                   <motion.div
                     whileInView={{ x: 0, opacity: 100 }}
                     transition={{ duration: 1, delay: 0.25 }}
@@ -76,12 +76,12 @@ const PageProducts = () => {
           </Carousel>
         </motion.div>
       </div>
-      <div className="flex flex-col items-center w-full max-w-[1200px] m-12 py-16 self-center">
+      <div className="flex flex-col items-center container m-12 py-16 self-center">
         <motion.div
           whileInView={{ y: 0, opacity: 100 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           initial={{ y: 30, opacity: 0 }}
-          className="text-3xl md:text-6xl font-extrabold text-sky-900 w-full px-8"
+          className="text-3xl md:text-6xl font-extrabold text-sky-900 w-full px-8 max-md:text-center"
         >
           All Products
         </motion.div>
