@@ -7,15 +7,15 @@ import { useEffect, useState } from "react";
 type Order = order & { products: product[] };
 const OrdersPage = () => {
   const [orders, setOrders] = useState<Order[] | null>(null);
-  const [id, setId] = useLocalStorage("id", "");
+  const [orderId, setOrderId] = useLocalStorage("orderId", "");
   useEffect(() => {
-    if (!id) return;
-    getOrders(id).then((data) => {
+    if (!orderId) return;
+    getOrders(orderId).then((data) => {
       if (data && Array.isArray(data)) {
         setOrders(data);
       }
     });
-  }, [id]);
+  }, [orderId]);
   return (
     <div className="my-auto h-full pt-28 md:py-48">
       <div className="container mx-auto px-6">
