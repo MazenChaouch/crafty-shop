@@ -1,12 +1,13 @@
 "use client";
 import getOrders from "@/action/order/get-order";
 import { Order } from "@/components/order";
+import useLocalStorage from "@/hooks/useLocalstorage";
 import { order, product } from "@prisma/client";
 import { useEffect, useState } from "react";
 type Order = order & { products: product[] };
 const OrdersPage = () => {
   const [orders, setOrders] = useState<Order[] | null>(null);
-  let id = localStorage.getItem("orderId");
+  const [id, setId] = useLocalStorage("id", "");
   useEffect(() => {
     if (!id) return;
     getOrders(id).then((data) => {

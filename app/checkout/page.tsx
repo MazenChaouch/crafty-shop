@@ -22,11 +22,13 @@ import { toast } from "@/components/ui/use-toast";
 import { useState, useTransition } from "react";
 import cuid from "cuid";
 import createOrder from "@/action/order/create-order";
+import useLocalStorage from "@/hooks/useLocalstorage";
 const CheckoutPage = () => {
   const [isPending, startTransition] = useTransition();
-  const [orderId, setOrderId] = useState<string>(
-    localStorage.getItem("orderId") || cuid(),
-  );
+  const [orderId, setOrderId] = useLocalStorage("orderId", "");
+  if (!orderId) {
+    setOrderId(cuid());
+  }
   const route = useRouter();
   const form = useForm<z.infer<typeof CheckoutSchema>>({
     resolver: zodResolver(CheckoutSchema),
