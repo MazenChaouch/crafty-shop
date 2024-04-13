@@ -7,14 +7,19 @@ import { Icon } from "@iconify/react";
 import { motion } from "framer-motion";
 import useToggleCartStore from "@/store/toggle-cart";
 import cartStore from "@/store/cart";
+import useToggleSidebare from "@/store/toggle-sidebar";
 export const Navbar = () => {
   const CartStore = useToggleCartStore();
+  const Sidebar = useToggleSidebare();
   const { numberOfProducts } = cartStore();
   return (
     <>
       <div className="w-full flex justify-center items-center mx-auto fixed shadow-md bg-white z-40 text-slate-600 max-md:px-4">
         <div className="h-20 container flex justify-between items-center self-center my-auto max-sm:px-3 max-xl:px-12 ">
-          <div className="flex items-center sm:hidden">
+          <div
+            className="flex items-center sm:hidden"
+            onClick={() => Sidebar.toggleSidebar()}
+          >
             <Icon icon="mdi:menu" height={25} width={25} />
           </div>
           <Link href="/" className="flex self-center max-sm:pl-12">
@@ -48,10 +53,10 @@ export const Navbar = () => {
               <span>Products</span>
             </Link>
             <Link
-              href=""
+              href="/orders"
               className="text-base md:text-lg  lg:text-xl max-sm:hidden"
             >
-              <span>Contact us</span>
+              <span>Orders</span>
             </Link>
             <Link
               href="/"

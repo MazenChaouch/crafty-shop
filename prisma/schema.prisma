@@ -16,7 +16,7 @@ model product {
   name       String
   link       String
   details    String
-  oldPrice  Int?
+  oldPrice   Int?
   price      Int
   discount   Int?
   image      String
@@ -27,15 +27,18 @@ model product {
 }
 
 model order {
-  id         String    @id @default(cuid())
-  name       String
-  lastname   String
-  email      String
-  telephone  String
+  id      Int     @id @default(autoincrement())
+  id_user String 
+  fullname   String
+  email      String?
+  phone  String
+  city       String
   address    String
-  status     String
+  zip        String?
+  products   product[]
+  numberOfProducts Int
   total      Float
+  status     String
   created_at DateTime  @default(now())
   updated_at DateTime  @updatedAt
-  products   product[]
 }

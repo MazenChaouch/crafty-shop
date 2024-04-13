@@ -18,7 +18,7 @@ export const Rating = ({ rating, titled }: RatingProps) => {
             key={index}
             src={rateIcon}
             alt="rating"
-            className="mr-0.5 h-5 w-5 text-sky-900"
+            className="mr-0.5 h-5 w-5"
           />
         ))}
 
@@ -27,7 +27,7 @@ export const Rating = ({ rating, titled }: RatingProps) => {
             key={index}
             src={starunfilled}
             alt="rating"
-            className="mr-0.5 h-5 w-5 text-sky-900"
+            className="mr-0.5 h-5 w-5 "
           />
         ))}
       </div>

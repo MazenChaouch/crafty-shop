@@ -8,8 +8,7 @@ interface ProductProps {
   product: product;
   index: number;
 }
-export const Product = ({ product, index }: ProductProps) => {
-  const { ...linkData } = product;
+export const Product = ({ product }: ProductProps) => {
   return (
     <motion.div
       whileInView={{ y: 0, opacity: 100 }}
@@ -18,7 +17,7 @@ export const Product = ({ product, index }: ProductProps) => {
       className="h-fit w-fit space-y-2 group group-hover:scale-95"
     >
       <Link href={{ pathname: `products/${product.link}`, query: product }}>
-        <div className="rounded-xl bg-stone-200 p-2">
+        <div className="p-2">
           <Image
             src={product1}
             alt={product.name}
@@ -26,24 +25,26 @@ export const Product = ({ product, index }: ProductProps) => {
           />
         </div>
       </Link>
-      <div className="font-Satoshi text-lg font-bold md:text-xl">
-        {product.name}
-      </div>
-      {product.rating != null && <Rating rating={product.rating} />}
-      <div className="flex h-fit w-full space-x-1 lg:space-x-2">
-        <div className="font-Satoshi text-sm font-bold md:text-xl text-sky-800">
-          {product.price} DT
+      <div className="p-2">
+        <div className="font-Satoshi text-lg font-bold md:text-xl">
+          {product.name}
         </div>
-        {product.oldPrice && (
-          <div className="font-Satoshi text-sm font-bold text-stone-500 line-through md:text-xl">
-            {product.oldPrice} DT
+        {product.rating != null && <Rating rating={product.rating} />}
+        <div className="flex h-fit w-full space-x-1 lg:space-x-2">
+          <div className="font-Satoshi text-sm font-bold md:text-xl text-sky-900">
+            {product.price} DT
           </div>
-        )}
-        {product.discount && (
-          <div className="g:py-1 rounded-xl bg-red-100 px-2 py-0.5 font-Satoshi font-medium text-red-500 max-lg:text-sm lg:rounded-3xl lg:px-3">
-            -{product.discount}%
-          </div>
-        )}
+          {product.oldPrice && (
+            <div className="font-Satoshi text-sm font-bold text-stone-500 line-through md:text-xl">
+              {product.oldPrice} DT
+            </div>
+          )}
+          {product.discount && (
+            <div className="g:py-1 rounded-xl bg-red-100 px-2 py-0.5 font-Satoshi font-medium text-red-500 max-lg:text-sm lg:rounded-3xl lg:px-3">
+              -{product.discount}%
+            </div>
+          )}
+        </div>
       </div>
     </motion.div>
   );

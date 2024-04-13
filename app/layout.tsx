@@ -7,6 +7,7 @@ import { Navbar } from "@/components/navbar";
 import { Cart } from "@/components/cart";
 import { Footer } from "@/components/footer";
 import { Toaster } from "@/components/ui/toaster";
+import { Sidebar } from "@/components/sidebar";
 const font = Poppins({ weight: "300", subsets: ["latin"], display: "swap" });
 export const metadata: Metadata = {
   title: "Crafty Shop",
@@ -24,6 +25,7 @@ export default function RootLayout({
           <Toaster />
           <Navbar />
           <Cart />
+          <Sidebar />
           {children}
           <Footer />
         </EdgeStoreProvider>

@@ -8,9 +8,10 @@ export const SendMail = async (
   total: number,
   numberOfProducts: number,
   unitPrice: number,
+  id: number,
 ) => {
   try {
-    await EmailSend(data, total, numberOfProducts, unitPrice);
+    await EmailSend(data, total, numberOfProducts, unitPrice, id);
     return true;
   } catch (error) {
     console.log("Error sending email", error);

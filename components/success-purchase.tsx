@@ -18,7 +18,7 @@ export const SuccessPurchase = () => {
           className="bg-sky-700 text-white hover:bg-sky-800 hover:text-white active:translate-y-0.5 px-24"
           asChild
         >
-          <Link href="/">Order list</Link>
+          <Link href="/orders">Order list</Link>
         </Button>
         <div className="flex max-md:flex-col items-center text-center">
           If you have questions please contact us on our facebook page or

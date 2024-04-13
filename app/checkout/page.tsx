@@ -19,7 +19,14 @@ import { SendMail } from "@/action/send-mail";
 import { useRouter } from "next/navigation";
 import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/components/ui/use-toast";
+import { useState, useTransition } from "react";
+import cuid from "cuid";
+import createOrder from "@/action/order/create-order";
 const CheckoutPage = () => {
+  const [isPending, startTransition] = useTransition();
+  const [orderId, setOrderId] = useState<string>(
+    localStorage.getItem("orderId") || cuid(),
+  );
   const route = useRouter();
   const form = useForm<z.infer<typeof CheckoutSchema>>({
     resolver: zodResolver(CheckoutSchema),
@@ -32,17 +39,43 @@ const CheckoutPage = () => {
   });
 
   const onSubmit = (data: z.infer<typeof CheckoutSchema>) => {
-    SendMail(data, total, numberOfProducts, cartProducts[0].product.price).then(
-      (res) => {
+    const { cartProducts, numberOfProducts, total } = useCartStore.getState();
+    startTransition(() => {
+      createOrder(
+        data,
+        cartProducts.map((product) => product.product),
+        total,
+        numberOfProducts,
+        orderId,
+      ).then((res) => {
         if (res) {
-          toast({
-            variant: "success",
-            title: "your order has been sent successfully",
-            description: "Check your email for more details",
+          SendMail(
+            data,
+            total,
+            numberOfProducts,
+            cartProducts[0].product.price,
+            Number(res),
+          ).then((res) => {
+            if (res) {
+              toast({
+                variant: "success",
+                title: "your order has been sent successfully",
+                description: "Check your email for more details",
+              });
+              clearCart();
+              form.reset();
+              route.push("/success");
+            } else {
+              toast({
+                variant: "destructive",
+                title: "Error",
+                description: "Error sending your email",
+                action: <ToastAction altText="Retry">Retry</ToastAction>,
+              });
+              clearCart();
+              form.reset();
+            }
           });
-          clearCart();
-          form.reset();
-          route.push("/success");
         } else {
           toast({
             variant: "destructive",
@@ -50,11 +83,9 @@ const CheckoutPage = () => {
             description: "Error sending your order",
             action: <ToastAction altText="Retry">Retry</ToastAction>,
           });
-          clearCart();
-          form.reset();
         }
-      },
-    );
+      });
+    });
   };
 
   const { handleSubmit } = form;
@@ -187,6 +218,7 @@ const CheckoutPage = () => {
           </div>
           <Button
             className="w-full bg-sky-700 text-white hover:bg-sky-800 hover:text-white active:translate-y-0.5"
+            disabled={isPending}
             onClick={() => {
               numberOfProducts != 0
                 ? handleSubmit(onSubmit)()

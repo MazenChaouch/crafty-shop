@@ -63,10 +63,10 @@ const PageProduct = () => {
               {data.name}
             </p>
             <div className="flex items-center gap-2">
-              <p className="text-xl font-bold text-sky-800">{data.price}DT</p>
+              <p className="text-xl font-bold text-sky-900">{data.price}DT</p>
             </div>
             <div className="flex w-fit">
-              <Rating rating={data.rating || 3.5} />
+              <Rating rating={data.rating || 0} />
             </div>
             <div className="mb-4">
               <div

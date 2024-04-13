@@ -10,6 +10,7 @@ export const EmailSend = async (
   total: number,
   numberOfProducts: number,
   unitPrice: number,
+  id: number,
 ) => {
   console.log("Sending email");
   const email = `<html lang="en">
@@ -26,7 +27,7 @@ export const EmailSend = async (
   <table border="0" cellspacing="0" cellpadding="5">
     <tr>
       <th>Order Number</th>
-      <td>(You can include this if you have one)</td>
+      <td>${id}</td>
     </tr>
     <tr>
       <th>Billing Information</th>
@@ -72,7 +73,7 @@ export const EmailSend = async (
     </tr>
     <tr>
       <td>Shipping</td>
-      <td>1</td>
+      <td></td>
       <td>Free</td>
     </tr>
     <tr>
